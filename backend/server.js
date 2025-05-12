@@ -7,6 +7,7 @@ const cors = require("cors");
 // routes
 // api dang ky dang nhap
 const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes");
 
 dotenv.config();
 const app = express();
@@ -14,14 +15,17 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+//import middleware
+const { verifyToken, isAdmin } = require("./middlewares/auth");
 
 //use routes
 app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
 
-// Routes placeholder (bạn sẽ thêm sau)
-app.get("/", (req, res) => {
-  res.send("Welcome to Drink Order API!");
-});
+// // Routes placeholder (bạn sẽ thêm sau)
+// app.get("/", (req, res) => {
+//   res.send("Welcome to Drink Order API!");
+// });
 
 // Kết nối MongoDB và khởi động server
 mongoose
