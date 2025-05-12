@@ -40,6 +40,11 @@ exports.createProduct = [
   async (req, res) => {
     try {
       const { category, title, price, discount, description } = req.body;
+      if (!category?.trim() || !title?.trim() || !description?.trim()) {
+        return res
+          .status(400)
+          .json({ message: "Vui lòng nhập đầy đủ thông tin sản phẩm." });
+      }
       const existingCategory = await Category.findOne({ name: category });
       let categoryId;
 
@@ -85,6 +90,17 @@ exports.updateProduct = [
   async (req, res) => {
     try {
       const { category, title, price, discount, description } = req.body;
+      if (
+        !category?.trim() ||
+        !title?.trim() ||
+        !price?.trim() ||
+        !discount?.trim() ||
+        !description?.trim()
+      ) {
+        return res
+          .status(400)
+          .json({ message: "Vui lòng nhập đầy đủ thông tin sản phẩm." });
+      }
       const productId = req.params.id;
 
       // Kiểm tra xem sản phẩm có tồn tại không trước khi cập nhật.
