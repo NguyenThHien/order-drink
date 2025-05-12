@@ -26,10 +26,12 @@ const ProductSchema = new Schema(
     },
     thumbnail: {
       type: String,
+      required: true,
       trim: true,
     },
     description: {
       type: String,
+      required: true,
     },
     deleted: {
       type: Boolean,

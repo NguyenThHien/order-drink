@@ -148,6 +148,17 @@
 
           row.querySelector("td:nth-child(7)").appendChild(imageInput);
 
+          imageInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                imageCell.src = e.target.result;
+              };
+              reader.readAsDataURL(file);
+            }
+          });
+
           deleteButton.addEventListener("click", function () {
             const confirmDelete = confirm(
               "Bạn có chắc chắn muốn xóa sản phẩm này không?"
@@ -244,7 +255,7 @@
               })
               .catch((error) => {
                 console.error("Lỗi khi gọi API cập nhật sản phẩm:", error);
-                alert("Lỗi khi cập nhật sản phẩm.22"); // Hiển thị thông báo lỗi
+                // alert("Lỗi khi cập nhật sản phẩm.22"); // Hiển thị thông báo lỗi
               });
           });
         }
@@ -256,7 +267,7 @@
               <td contenteditable="true" class="name">Nhập tên</td>
               <td contenteditable="true" class="category">Nhập loại</td>
               <td contenteditable="true" class="price">Nhập giá</td>
-              <td contenteditable="true" class="discount">Nhập ghi chú</td>
+              <td contenteditable="true" class="discount">giảm giá...</td>
               <td contenteditable="true" class="description">Nhập mô tả</td>
               <td><img src="img.png" alt="New" width="50"><input type="file" accept="image/*"></td>
               <td>
@@ -276,6 +287,17 @@
           const descriptionCell = newRow.querySelector(".description");
           const imageInput = newRow.querySelector('input[type="file"]');
           const imageCell = newRow.querySelector("td:nth-child(7) img");
+
+          imageInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                imageCell.src = e.target.result;
+              };
+              reader.readAsDataURL(file);
+            }
+          });
 
           saveNewButton.addEventListener("click", function () {
             const newProductData = {
@@ -373,3 +395,5 @@
     </script>
   </body>
 </html>
+
+<!-- //done -->
